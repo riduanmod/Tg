@@ -1,0 +1,7 @@
+Flask
+requests
+aiohttp
+pycryptodome
+protobuf
+urllib3
+pyTelegramBotAPI
