@@ -304,5 +304,25 @@ def handle_like_request():
         "Region": server_name
     })
 
+# =========================================================
+# 🚀 AUTO WEBHOOK & APP RUNNER
+# =========================================================
+
+def auto_set_webhook():
+    """Vercel-এ রান হওয়ার সাথে সাথে নিজে থেকে Webhook সেট করবে"""
+    # আপনার Vercel ডোমেইনটি এখানে দিন (অবশ্যই শেষে / ছাড়া)
+    VERCEL_URL = "https://tg-two-blush.vercel.app" 
+    webhook_url = f"{VERCEL_URL}/{BOT_TOKEN}"
+    
+    # টেলিগ্রাম এপিআই কল করে Webhook সেট করা
+    url = f"https://api.telegram.org/bot{BOT_TOKEN}/setWebhook?url={webhook_url}"
+    try:
+        requests.get(url, timeout=5)
+        print(f"✅ Webhook Automatically Set To: {webhook_url}")
+    except:
+        pass
+
 if __name__ == '__main__':
+    # সার্ভার চালুর আগেই Webhook সেট করে নিবে
+    auto_set_webhook()
     app.run(host='0.0.0.0', port=5001, debug=False, use_reloader=False)
